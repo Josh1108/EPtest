@@ -1,0 +1,42 @@
+dataset:
+  name: ewt-pos
+  path: ${EP_TESTS_DATA}/tokenized_data/roberta-base/ewt-pos
+label: ewt-pos-rb-random
+loader:
+  batchsz: 80
+  hf_tokenizer_model_or_loc: roberta-base
+  label_2_id: ${EP_TESTS_HOME}/eptests/core/config/dataset-labels/ewt-pos.yml
+  max_length: 307
+  multi_label: false
+  name: one-span
+  sampler:
+    name: sequential
+model:
+  classifier:
+    hsz: 768
+    name: linear
+    num_labels: 17
+  encoder:
+    hf_model_or_loc: Jo1811/roberta-random
+    layer_index: -1
+    name: default
+  probe:
+    multi_label: false
+    name: one-span
+  span_pooler:
+    name: mean
+  token_pooler:
+    name: mean
+reporting:
+  console:
+    module: baseline.reporting
+  wandb:
+    module: eptests.core.reporting_wandb
+train:
+  early_stopping_metric: acc
+  epochs: 3
+  eta: 0.001
+  lr_scheduler_type: warmup_linear
+  optim: adamw
+  warmup_steps: 761
+  weight_decay: 0.01

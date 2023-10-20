@@ -1,0 +1,26 @@
+dataset:
+  name: ontonotes-const
+  path: ${EP_TESTS_DATA}/tokenized_data/roberta-base/ontonotes-const
+loader:
+  name: one-span
+  hf_tokenizer_model_or_loc: roberta-base
+  batchsz: 80
+  label_2_id: ${EP_TESTS_HOME}/eptests/core/config/dataset-labels/ontonotes-const.yml
+  sampler:
+    name: sequential
+  multi_label: false
+  max_length: 344
+  data_filter:
+  - train-dist-sampling
+  - train-input
+  - random-sampling
+model_loc_or_config:
+  dataset: ontonotes-const
+  label: ontonotes-const-rb-mlp-random
+  metric: acc
+reporting:
+  wandb:
+    module: eptests.core.reporting_wandb
+  console:
+    module: baseline.reporting
+label: ontonotes-const-rb-mlp-random-test

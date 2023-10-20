@@ -1,0 +1,26 @@
+dataset:
+  name: ontonotes-srl
+  path: ${EP_TESTS_DATA}/tokenized_data/bert-base-cased/ontonotes-srl
+loader:
+  name: two-span
+  hf_tokenizer_model_or_loc: bert-base-cased
+  batchsz: 80
+  label_2_id: ${EP_TESTS_HOME}/eptests/core/config/dataset-labels/ontonotes-srl.yml
+  sampler:
+    name: sequential
+  multi_label: false
+  max_length: 351
+  data_filter:
+    -  train-dist-sampling
+    -  train-input
+    -  random-sampling
+model_loc_or_config:
+  dataset: ontonotes-srl
+  label: ontonotes-srl-bertbc
+  metric: acc
+reporting:
+  wandb:
+    module: eptests.core.reporting_wandb
+  console:
+    module: baseline.reporting
+label: ontonotes-srl-bertbc-test

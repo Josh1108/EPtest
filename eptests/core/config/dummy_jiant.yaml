@@ -1,0 +1,35 @@
+task_config_path_dict:
+  boolq: ${jiant}/tasks/configs/boolq-flipped_config.yml
+task_cache_config_dict:
+  boolq:
+    train: ${jiant}/cache/boolq-flipped/train
+    val: ${jiant}/cache/boolq-flipped/val
+    val_labels: ${jiant}/cache/boolq-flipped/val_labels
+    test: ${jiant}/cache/boolq-flipped/test
+    test_labels: ${jiant}/cache/boolq-flipped/test_labels
+sampler_config:
+  sampler_type: ProportionalMultiTaskSampler
+global_train_config:
+  max_steps: 5900
+  warmup_steps: 590
+task_specific_configs_dict:
+  boolq:
+    train_batch_size: 16
+    eval_batch_size: 8
+    gradient_accumulation_steps: 1
+    eval_subset_num: 500
+taskmodels_config:
+  task_to_taskmodel_map:
+    boolq: boolq
+  taskmodel_config_map:
+    boolq: null
+task_run_config:
+  train_task_list: &id001
+  - boolq
+  train_val_task_list: *id001
+  val_task_list:
+  - boolq
+  test_task_list:
+  - boolq
+metric_aggregator_config:
+  metric_aggregator_type: EqualMetricAggregator

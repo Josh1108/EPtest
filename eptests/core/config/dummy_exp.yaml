@@ -1,0 +1,18 @@
+DATA:
+  PATH: ${EP_TESTS_DATA}/tokenized_data/bert-base-cased/spr2.json
+EXPERIMENT:
+  BATCH_SIZE: 8
+  EPOCHS: 1
+  SAVE_PATH: ${EP_TESTS_DATA}/experiments/exp01
+  SPAN_POOLER: mean
+  TOKEN_POOLER: mean
+  ENCODER: bert-base-cased
+  ENCODING_DIM: 768
+  ENCODER_LAYER_IDX: 1
+  CLASSIFIER: linear
+  SEED: 300
+OPTIMIZER:
+  LR: 0.005
+  OPTIMIZER_NAME:  Adam
+  LR_SCHEDULER: multistep
+

@@ -1,0 +1,26 @@
+dataset:
+  name: semeval-2010-task8-rel-cls
+  path: ${EP_TESTS_DATA}/tokenized_data/roberta-base/semeval-2010-task8-rel-cls
+loader:
+  name: two-span
+  hf_tokenizer_model_or_loc: roberta-base
+  batchsz: 80
+  label_2_id: ${EP_TESTS_HOME}/eptests/core/config/dataset-labels/semeval-2010-task8-rel-cls.yml
+  sampler:
+    name: sequential
+  multi_label: false
+  max_length: 116
+  data_filter:
+    -  train-dist-sampling
+    -  train-input
+    -  random-sampling
+model_loc_or_config: 
+  dataset: semeval-2010-task8-rel-cls
+  label: semeval-2010-task8-rel-cls-rb  # I am hoping in later training runs, we will use the label field more judiciously.
+  metric: weighted_f1
+reporting:
+  wandb:
+    module: eptests.core.reporting_wandb
+  console:
+    module: baseline.reporting
+label: semeval-2010-task8-rel-cls-rb-test

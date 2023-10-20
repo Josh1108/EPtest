@@ -1,0 +1,26 @@
+dataset:
+  name: ptb-syn-dep-cls
+  path: ${EP_TESTS_DATA}/tokenized_data/roberta-base/ptb-syn-dep-cls
+loader:
+  name: two-span
+  hf_tokenizer_model_or_loc: roberta-base
+  batchsz: 80
+  label_2_id: ${EP_TESTS_HOME}/eptests/core/config/dataset-labels/ptb-syn-dep-cls.yml
+  sampler:
+    name: sequential
+  multi_label: false
+  max_length: 164
+  data_filter:
+  - train-dist-sampling
+  - random-sampling
+  - train-input
+model_loc_or_config:
+  dataset: ptb-syn-dep-cls
+  label: ptb-syn-dep-cls-rb-mlp
+  metric: acc
+reporting:
+  wandb:
+    module: eptests.core.reporting_wandb
+  console:
+    module: baseline.reporting
+label: ptb-syn-dep-cls-rb-mlp-test

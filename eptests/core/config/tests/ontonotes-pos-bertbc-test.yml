@@ -1,0 +1,23 @@
+dataset:
+  name: ontonotes-pos
+  path: ${EP_TESTS_DATA}/tokenized_data/bert-base-cased/ontonotes-pos
+loader:
+  name: one-span
+  hf_tokenizer_model_or_loc: bert-base-cased
+  batchsz: 80
+  label_2_id: ${EP_TESTS_HOME}/eptests/core/config/dataset-labels/ontonotes-pos.yml
+  sampler:
+    name: sequential
+  multi_label: false
+  max_length: 363
+  data_filter:
+    - train-dist-sampling
+    - random-sampling
+    - train-input
+model_loc_or_config: ${EP_TESTS_HOME}/data/trained_models/classify-1877553/classify-model-1877553.pyt
+reporting:
+  wandb:
+    module: eptests.core.reporting_wandb
+  console:
+    module: baseline.reporting
+label: ontonotes-pos-bertbc-test
