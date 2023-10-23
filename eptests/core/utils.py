@@ -1,6 +1,13 @@
 import datetime
 import torch
-from typing import Dict
+from typing import Dict, List, Mapping, Tuple
+from tqdm import tqdm
+import json
+import yaml
+from eptests.libs.yamlenv import load as yaml_load
+
+
+YML_EXTENSIONS = ["yml", "yaml"]
 
 
 def good_update_interval(total_iters, num_desired_updates):
@@ -54,3 +61,43 @@ def remove_key_from_dict(_dict: Dict, _key: str = "name") -> Dict:
     :return:
     """
     return {k: v for k, v in _dict.items() if k != _key}
+
+
+def read_json_or_yml(path):
+    if path.endswith("jsonl"):
+        con = []
+        for line in tqdm(open(path)):
+            con.append(json.loads(line))
+        return con
+    if path.endswith("json"):
+        return json.load(open(path))
+    elif any([path.endswith(ext) for ext in YML_EXTENSIONS]):
+        return yaml_load(open(path))
+    raise RuntimeError("config must be json or yaml")
+
+
+def write_file(data, path, mode="w", **kwargs):
+    with open(path, mode=mode, **kwargs) as f:
+        f.write(data)
+
+
+def rec_val_replace(obj, replacements: List[Tuple[str, str]]):
+    if isinstance(obj, Mapping):
+        return {key: rec_val_replace(val, replacements)
+                for key, val in obj.items()}
+    elif isinstance(obj, str):
+        for to_replace, replace_with in replacements:
+            obj = obj.replace(to_replace, replace_with)
+        return obj
+    return obj
+
+
+def write_json_yml(data, path, yml=False, replacements: List[Tuple[str, str]] = []):
+    if not yml:
+        return write_file(json.dumps(data, indent=2), path)
+    if not replacements:
+        yaml.safe_dump(data, open(path, 'w'), default_flow_style=False)
+        return
+    data = rec_val_replace(data, replacements)
+    yaml.safe_dump(data, open(path, 'w'),  default_flow_style=False, sort_keys=False)
+    return

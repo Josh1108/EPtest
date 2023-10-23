@@ -1,7 +1,7 @@
 """
 Test a trained model, with dataset filtering
 """
-from jiant.utils.python.io import read_json_or_yml
+from eptests.core.utils import read_json_or_yml
 from eptests.core.trainer import get_data
 from baseline.train import create_trainer
 from typing import Dict, Union, List

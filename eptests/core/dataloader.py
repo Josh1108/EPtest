@@ -9,7 +9,7 @@ from typing import Dict, List, Optional, Tuple, Union
 import torch
 from torch.utils.data import DataLoader, SequentialSampler, random_split
 from dataclasses import dataclass
-from jiant.utils.python.io import write_json_yml
+from eptests.core.utils import write_json_yml
 from transformers import AutoTokenizer, PreTrainedTokenizer, PreTrainedTokenizerFast
 import numpy as np
 from collections import defaultdict

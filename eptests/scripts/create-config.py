@@ -2,7 +2,7 @@
 This script will create config files for single label multi class classification tasks, following ewt-pos
 """
 import argparse
-from jiant.utils.python.io import read_json_or_yml, write_json_yml
+from eptests.core.utils import read_json_or_yml, write_json_yml
 import os
 import json
 from typing import Dict

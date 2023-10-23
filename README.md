@@ -1,11 +1,6 @@
 
-
-
 ### Installation
-We require `jiant`. For installation, refer to:
-https://github.com/nyu-mll/jiant#installation
-
-Next, run the following commands:
+Run the following commands:
 
 ```bash
 git clone https://github.com/Josh1108/EPtest/tree/main
@@ -37,3 +32,7 @@ For testing, run:
 ```bash
 python3 test.py --config_file <PATH_OF_FILE>
 ```
+
+
+### Datasets
+We are still figuring out copyright issues with the datasets, in the meantime, if you want access, please email us at [sagnikrayc at gmail dot com](unreachable link)

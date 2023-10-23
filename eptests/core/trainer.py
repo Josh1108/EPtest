@@ -1,5 +1,5 @@
 from typing import Dict, List
-from jiant.utils.python.io import read_json_or_yml
+from eptests.core.utils import read_json_or_yml
 from baseline.pytorch.classify.model import ClassifierModelBase
 from baseline.pytorch.classify.train import fit
 from baseline.reporting import create_reporting
